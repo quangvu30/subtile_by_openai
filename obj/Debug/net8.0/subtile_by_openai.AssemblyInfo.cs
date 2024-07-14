@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("subtile_by_openai")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+efcb667d12db335d3c2357034d7ffc3dac98ce58")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f5ea27378afb8e6a2aada9553a65e1a88d66b1fc")]
 [assembly: System.Reflection.AssemblyProductAttribute("subtile_by_openai")]
 [assembly: System.Reflection.AssemblyTitleAttribute("subtile_by_openai")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

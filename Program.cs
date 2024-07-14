@@ -18,8 +18,9 @@ class Program
             Console.WriteLine("====================================");
             Console.WriteLine("=============== Menu ===============");
             Console.WriteLine("1. Set OpenAI key");
-            Console.WriteLine("2. Select MP3/MP4 file");
-            Console.WriteLine("3. Exit");
+            Console.WriteLine("2. Get transcription from mp3/mp4");
+            Console.WriteLine("3. Split audio from mp4");
+            Console.WriteLine("4. Exit");
 
             Console.Write("Enter your choice: ");
             int choice = 0;
@@ -53,7 +54,7 @@ class Program
                         Console.WriteLine("Please set the API key first.");
                         break;
                     }
-                    Console.Write("Enter mp3/mp4 file: ");
+                    Console.Write("Enter mp3/mp4 file (Paths cannot contain spaces): ");
                     string file = Console.ReadLine();
                     
                     if (File.Exists(file))
@@ -62,21 +63,13 @@ class Program
                         switch (extension)
                         {
                             case ".mp3":
+                                optimizeAudio(file);
+                                GetTranscriptFromOpenAI(apiKey, file);
                                 break;
                             case ".mp4":
                                 splitAudio(file);
                                 optimizeAudio();
-                              
-                                string transcript = GetTranscriptFromOpenAI(apiKey, "temp.ogg").Result;
-                                if (Directory.Exists(Path.Combine(Environment.CurrentDirectory, "output")) == false)
-                                {
-                                    Directory.CreateDirectory("output");
-                                }
-                                string output = Path.Combine([Environment.CurrentDirectory, "output" , Path.GetFileNameWithoutExtension(file) + ".srt"]);
-                                File.WriteAllText(output, transcript);
-                                Console.WriteLine("Transcript saved to " + output);
-                                File.Delete("temp.mp3");
-                                File.Delete("temp.ogg");
+                                GetTranscriptFromOpenAI(apiKey, file);
                                 break;
                             default:
                                 Console.WriteLine("Invalid file type. Please try again.");
@@ -88,7 +81,25 @@ class Program
                         Console.WriteLine("File does not exist.");
                     }
                     break;
-                case 3:
+                case 3: 
+                    Console.Write("Enter mp4 file (Paths cannot contain spaces): ");
+                    string mp4File = Console.ReadLine();
+                    if (File.Exists(mp4File))
+                    {
+                        string output = Path.Combine([Environment.CurrentDirectory, "output", Path.GetFileNameWithoutExtension(mp4File) + ".mp3"]);
+                        if (File.Exists(output))
+                        {
+                            File.Delete(output);
+                        }
+                        splitAudio(mp4File, output);
+                        Console.WriteLine("Audio saved to " + output);
+                    }
+                    else
+                    {
+                        Console.WriteLine("File does not exist.");
+                    }
+                    break;
+                case 4:
                     Console.WriteLine("Exiting...");
                     return;
                 default:
@@ -98,29 +109,37 @@ class Program
         }
     }
 
-    static void splitAudio(string file)
+    static void splitAudio(string file, string output = "")
     {
         Console.WriteLine("Splitting audio...");
         if (File.Exists("temp.mp3"))
         {
             File.Delete("temp.mp3");
         }
-        string command = ffmpegPath + " -i \"" + file + "\" -vn -acodec libmp3lame temp.mp3";
+        if (output == "")
+        {
+            output = "temp.mp3";
+        }
+        string command = ffmpegPath + " -i \"" + file + "\" -vn -acodec libmp3lame " + output;
         runCommand(command);
     }
 
-    static void optimizeAudio()
+    static void optimizeAudio(string audioPath = "")
     {
         Console.WriteLine("Optimizing audio...");
         if (File.Exists("temp.ogg"))
         {
             File.Delete("temp.ogg");
         }
-        string command = ffmpegPath + " -i temp.mp3  -vn -map_metadata -1 -ac 1 -c:a libopus -b:a 12k -application voip temp.ogg";
+        if (audioPath == "")
+        {
+            audioPath = "temp.mp3";
+        }
+        string command = ffmpegPath + " -i " + audioPath +  " -vn -map_metadata -1 -ac 1 -c:a libopus -b:a 12k -application voip temp.ogg";
         runCommand(command);
     }
 
-    static async Task<string> GetTranscriptFromOpenAI(string apiKey, string audioFilePath)
+    static async void GetTranscriptFromOpenAI(string apiKey, string fileRoot)
     {
         string apiEndpoint = "https://api.openai.com/v1/audio/transcriptions";
 
@@ -129,7 +148,7 @@ class Program
             try
             {
                 // Prepare the audio file
-                var audioContent = new ByteArrayContent(File.ReadAllBytes(audioFilePath));
+                var audioContent = new ByteArrayContent(File.ReadAllBytes("temp.ogg"));
                 audioContent.Headers.ContentType = new MediaTypeHeaderValue("audio/ogg");
 
                 // Set up the request
@@ -150,12 +169,25 @@ class Program
                 // Parse the response JSON
                 //var jsonResponse = JObject.Parse(responseString);
                 //var transcription = jsonResponse.ToString();
-                return responseString;
+                if (Directory.Exists(Path.Combine(Environment.CurrentDirectory, "output")) == false)
+                {
+                    Directory.CreateDirectory("output");
+                }
+                string output = Path.Combine([Environment.CurrentDirectory, "output", Path.GetFileNameWithoutExtension(fileRoot) + ".srt"]);
+                File.WriteAllText(output, responseString);
+                Console.WriteLine("Transcript saved to " + output);
+                if (File.Exists("temp.mp3"))
+                {
+                    File.Delete("temp.mp3");
+                }
+                if (File.Exists("temp.ogg"))
+                {
+                    File.Delete("temp.ogg");
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred: {ex.Message}");
-                return null;
             }
         }
     }

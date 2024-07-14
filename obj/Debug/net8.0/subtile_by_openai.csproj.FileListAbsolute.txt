@@ -15,3 +15,4 @@ D:\Documents\Project\winform\subtile_by_openai\obj\Debug\net8.0\refint\subtile_b
 D:\Documents\Project\winform\subtile_by_openai\obj\Debug\net8.0\subtile_by_openai.pdb
 D:\Documents\Project\winform\subtile_by_openai\obj\Debug\net8.0\subtile_by_openai.genruntimeconfig.cache
 D:\Documents\Project\winform\subtile_by_openai\obj\Debug\net8.0\ref\subtile_by_openai.dll
+D:\Documents\Project\winform\subtile_by_openai\obj\Debug\net8.0\subtile_by_openai.sourcelink.json
