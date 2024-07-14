@@ -1,0 +1,17 @@
+D:\Documents\Project\winform\subtile_by_openai\bin\Debug\net8.0\subtile_by_openai.exe
+D:\Documents\Project\winform\subtile_by_openai\bin\Debug\net8.0\subtile_by_openai.deps.json
+D:\Documents\Project\winform\subtile_by_openai\bin\Debug\net8.0\subtile_by_openai.runtimeconfig.json
+D:\Documents\Project\winform\subtile_by_openai\bin\Debug\net8.0\subtile_by_openai.dll
+D:\Documents\Project\winform\subtile_by_openai\bin\Debug\net8.0\subtile_by_openai.pdb
+D:\Documents\Project\winform\subtile_by_openai\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\Documents\Project\winform\subtile_by_openai\obj\Debug\net8.0\subtile_by_openai.csproj.AssemblyReference.cache
+D:\Documents\Project\winform\subtile_by_openai\obj\Debug\net8.0\subtile_by_openai.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\Project\winform\subtile_by_openai\obj\Debug\net8.0\subtile_by_openai.AssemblyInfoInputs.cache
+D:\Documents\Project\winform\subtile_by_openai\obj\Debug\net8.0\subtile_by_openai.AssemblyInfo.cs
+D:\Documents\Project\winform\subtile_by_openai\obj\Debug\net8.0\subtile_by_openai.csproj.CoreCompileInputs.cache
+D:\Documents\Project\winform\subtile_by_openai\obj\Debug\net8.0\subtile_.503D3CA4.Up2Date
+D:\Documents\Project\winform\subtile_by_openai\obj\Debug\net8.0\subtile_by_openai.dll
+D:\Documents\Project\winform\subtile_by_openai\obj\Debug\net8.0\refint\subtile_by_openai.dll
+D:\Documents\Project\winform\subtile_by_openai\obj\Debug\net8.0\subtile_by_openai.pdb
+D:\Documents\Project\winform\subtile_by_openai\obj\Debug\net8.0\subtile_by_openai.genruntimeconfig.cache
+D:\Documents\Project\winform\subtile_by_openai\obj\Debug\net8.0\ref\subtile_by_openai.dll

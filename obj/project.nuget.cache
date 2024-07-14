@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "zeItAttE6Xg=",
+  "success": true,
+  "projectFilePath": "D:\\Documents\\Project\\winform\\subtile_by_openai\\subtile_by_openai.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\PC\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
